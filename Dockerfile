@@ -12,12 +12,15 @@ COPY package*.json /app/
 RUN npm install
 
 # Copy app source
-COPY ./ /app/
+COPY . .
 
-RUN npm install -g ionic
+RUN npm install -g @ionic/cli
 
 RUN ionic build
 # Bind the port that the image will run on
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
 EXPOSE 8100
 # Define the Docker image's behavior at runtime
+COPY --from=ionic  /usr/src/app/www /usr/share/nginx/html
 CMD ["ionic", "serve"]
