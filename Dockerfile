@@ -23,4 +23,4 @@ RUN rm -rf /usr/share/nginx/html/*
 EXPOSE 8100
 # Define the Docker image's behavior at runtime
 COPY --from=build  /usr/src/app/www /usr/share/nginx/html
-#CMD ["ionic", "serve"]
+CMD ["ionnic", "serve","prod"]
