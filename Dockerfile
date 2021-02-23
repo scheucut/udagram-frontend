@@ -11,7 +11,7 @@ RUN npm install
 COPY ./ /app/
 
 RUN npm run-script build
-
+EXPOSE 8100
 FROM nginx:alpine
 
 RUN rm -rf /usr/share/nginx/html/*
