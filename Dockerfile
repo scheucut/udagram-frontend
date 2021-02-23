@@ -1,14 +1,19 @@
 FROM node:13-alpine as build
-WORKDIR /app
-COPY package*.json /app/
+
+WORKDIR /src
+
+COPY package*.json /src
+
 RUN npm install -g ionic
+
 RUN npm install
-COPY . .
-#RUN npm run-script build:prod
+
+COPY ./ /src/
+
+RUN npm run-script build
+
 FROM nginx:alpine
+
 RUN rm -rf /usr/share/nginx/html/*
-#COPY --from=build ./www/ /usr/share/nginx/html/
-EXPOSE 8100
-# Define the Docker image's behavior at runtime
-COPY --from=build  /app/www /usr/share/nginx/html
-CMD ["ionic", "serve","prod"]
+
+COPY --from=build /src/www/ /usr/share/nginx/html/
