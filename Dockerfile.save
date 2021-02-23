@@ -18,7 +18,7 @@ RUN npm install -g @ionic/cli
 
 RUN ionic build
 # Bind the port that the image will run on
-#FROM nginx:alpine
+FROM nginx:alpine
 #RUN rm -rf /usr/share/nginx/html/*
 EXPOSE 8100
 # Define the Docker image's behavior at runtime
